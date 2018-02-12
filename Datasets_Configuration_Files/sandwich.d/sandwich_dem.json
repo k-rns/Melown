@@ -1,0 +1,36 @@
+[{
+    "group" : "sandwich",
+    "id" : "sandwich_dem_resampling",
+    "comment" : "Sandwich DEM",
+    "type" : "surface",
+    "driver" : "surface-dem",
+    "definition" : {
+        "dataset" : "sandwich/sandwich_dem_resampling",
+        "geoidGrid": "egm96_15.gtx",
+        "introspection": {
+            "tms": {
+                "group": "sandwich",
+                "id": "sandwich_ortho"
+            },
+            "position": ["obj",-70.481013,41.765911,"float",0.000000,0.000000,-90.000000,0.000000,2407.202226,45.000000]
+        }
+    },
+    "referenceFrames" : {
+        "melown2015" : {
+            "lodRange" : [ 15, 23 ],
+            "tileRange" : [
+                [ 4983, 6095 ],
+                [ 4984, 6096 ]
+            ]
+        }
+    },
+    "registry" : {
+        "credits" : {
+            "USGS eastern region" : {
+                "id" : 206,
+                "notice" : "USGS - Chis Sherwood"
+            }
+        }
+    },
+    "credits" : [ "USGS eastern region" ]
+}]

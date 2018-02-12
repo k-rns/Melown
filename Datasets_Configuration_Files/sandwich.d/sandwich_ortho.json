@@ -1,0 +1,30 @@
+[{
+    "group" : "sandwich",
+    "id" : "sandwich_ortho",
+    "comment" : "Sandwich March 2017 ORTHO",
+    "type" : "tms",
+    "driver" : "tms-raster",
+    "definition" :  {
+        "dataset" : "sandwich/sandwich_ortho",
+        "format" : "jpg",
+        "transparent" : false
+    },
+    "referenceFrames" : {
+        "melown2015" : {
+            "lodRange" : [ 15, 23 ],
+            "tileRange" : [
+                [ 4983, 6095 ],
+                [ 4984, 6096 ]
+            ]
+        }
+    },
+    "registry" : {
+        "credits" : {
+            "USGS eastern region" : {
+                "id" : 206,
+                 "notice" : "USGS - Chris Sherwood"
+            }
+        }
+    },
+    "credits" : [ "USGS eastern region" ]
+}]

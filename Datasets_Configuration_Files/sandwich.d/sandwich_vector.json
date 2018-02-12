@@ -1,0 +1,32 @@
+[{
+    "comment": "Sandwich sampling location 10 January 2018",   
+    "group": "sandwich",
+    "id": "vector", 
+    "type": "geodata",   
+    "driver": "geodata-vector",    
+    "definition": {
+        "dataset": "sandwich/vector/Targets.json",
+        "demDataset": "sandwich/sandwich_dem_resampling",
+        "geoidGrid": "egm96_15.gtx",
+        "displaySize": 1024,
+        "mode": "auto",
+        "styleUrl": "file:sandwich/vector/sampling_locations.style",
+        "introspection": {
+            "surface": {
+                "group": "sandwich",
+                "id": "sandwich_dem_resampling"
+            },
+            "browserOptions": {}
+        }
+    },
+    "referenceFrames": {
+        "melown2015": {
+            "lodRange": [15,23],
+            "tileRange": [[4983,6095], [4984,6096]]
+        }
+    },
+    "registry": {
+        "credits": {"USGS eastern region": { "id": 206, "notice" : "USGS - Chris Sherwood" }}
+    },
+    "credits": ["USGS eastern region"]
+}]
