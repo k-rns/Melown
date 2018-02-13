@@ -24,7 +24,7 @@ The mapproxy freezes resource definitions in its store. If the original data was
 MBTiles = file format for storing tilesets  
 Tilesets = Collection of raster or vector data broken up into a uniform grid of square tiles at 22 preset zoom levels. Tilesets are used in Mapbox libraries and SDKs as a core piece of making maps visible on mobile devices or in the browser. They are also the main mechanism we use for determining map views.Tilesets are highly cacheable and load quickly. Mapbox relies heavily on both raster and vector tilesets to keep our maps fast and efficient.  
 
- 
+
 
 # Preparation
 Important directories to make:  
@@ -59,7 +59,7 @@ $ for resampling in min max cubicspline; do \
     generatevrtwo --input 2017-03-16_Sandwich_v1_DEM_10cm.tif \
         --output 2017-03-16_Sandwich_v1_DEM_10cm.$resampling \
         --resampling $resampling --overwrite 1; done
-```  
+```
 Try to add if not work: --co PREDICTOR=3  
 
 Create directory to hold symbolic links (in the directory you've changed to):   
@@ -69,7 +69,7 @@ $ ln -s ../2017-03-16_Sandwich_v1_DEM_10cm.cubicspline/dataset dem
 $ ln -s ../2017-03-16_Sandwich_v1_DEM_10cm.min/dataset dem.min
 $ ln -s ../2017-03-16_Sandwich_v1_DEM_10cm.max/dataset dem.max
 $ cd .. 
-```  
+```
 
 Take measurements of one of the newly created datasets:```$ mapproxy-calipers sandwich_dem_resampling/dem.min --referenceFrame melown2015```  
 Measurements:    
@@ -80,7 +80,7 @@ Mapproxy tiling: make sure that the tiling and the names of the dem on which the
 ```
 $ mapproxy-tiling --input sandwich_dem_resampling --referenceFrame melown2015 \
     --lodRange 15,23 --tileRange 4983,6095:4984,6096
-```  
+```
 
 ### Set up the terrain resource configuration file
 Create resource configuration file: ```$ touch /etc/vts/mapproxy/sandwich.d/sandwich_dem.json```  
@@ -122,7 +122,7 @@ With following content: position is from the mapproxy-callipers outcome.
     },
     "credits" : [ "USGS eastern region" ]
 }]
-```  
+```
 
 # Set up bound layers:  
 VOCABULARY: Bound layers are tiled texture/imagery layers draped over surfaces. Map configuration (resources.json) tells client which bound layers should be bound to a particular surface  
@@ -142,7 +142,7 @@ Take measurements from the dataset using the mapproxy-callipers command. The out
 ```
 $ cd /var/vts/mapproxy/datasets/sandwich
 $ mapproxy-calipers sandwich_ortho --referenceFrame melown2015 
-```  
+```
 Results:  
 range: 15,23 4983,6095:4984,6096
 position: obj,-70.480140,41.766404,float,0.000000,0.000000,-90.000000,0.000000,1369.695663,45.000000  
@@ -180,7 +180,7 @@ Create a resource configuration file for the orthophoto: ```$  /etc/vts/mapproxy
     },
     "credits" : [ "USGS eastern region" ]
 }]
-``` 
+```
 
 # Set up vector layer (monolithic):  
 Set up a "monolithic geodata free layer definition" - geodata-vector driver, instead of a geodata-vector-tiled driver found at the cadastre. Put the .kmz, .json or .shp file in the dataset folder: ```var/vts/mapproxy/datasets/sandwich/vector/Targets.json ```   
@@ -224,6 +224,8 @@ In VTS terminology, you will create a monolithic geodata free layer definition. 
 ### Create the style configuration file
 Geodata free layers are stylable in a manner remotely resembling CSS. The style file is referenced in the above resource definition (definition.styleUrl). The file does not exist yet. Fix this by putting the following into ``` /var/vts//mapproxy/datasets/sandwich/vector/sampling_locations.style ```:  
 
+How to format VTS geodata can be found here: https://github.com/Melown/vts-browser-js/wiki/VTS-Geodata-Format
+
 ```
 {
     "layers": {
@@ -245,12 +247,14 @@ Geodata free layers are stylable in a manner remotely resembling CSS. The style 
         }
     }
 }
-```  
-# Adding layer switch (frontend)  
+```
+
 
 
 # Error log
 Check the error log for mistakes: ``` /var/log/vts/mapproxy.log ```  
+
+
 
 
 # URL's
@@ -260,3 +264,25 @@ Build-up of the URL can be found here: http://vtsdocs.melown.com/en/latest/refer
 
 Following URL should hold the 3D map: http://jetstream.signell.us:8070/mapproxy/melown2015/surface/sandwich/sandwich_dem_resampling/  
 Description URL: <server>:<port>/<reference-frame>/<resource-type>/<resource-group>/<resource-id>/ 
+
+
+
+# Summary
+
+Datasets: 
+
++ /var/vts/mapproxy/datasets/sandwich/sandwich_dem_resampling
+
++ /var/vts/mapproxy/datasets/sandwich/sandwich_ortho
+
++ /var/vts/mapproxy/datasets/sandwich/vector/Targets.json
+
+  ​
+
+
+
+Resources: 
+
++  /etc/vts/mapproxy/sandwich.d/sandwich_dem.json
++ /etc/vts/mapproxy/sandwich.d/sandwich_ortho.json
++ /etc/vts/mapproxy/sandwich.d/sandwich_vector.json
