@@ -90,7 +90,29 @@ File name: sandwich_app.js and reference to this file in the <body> section, und
 
 ## CSS set-up
 
-CSS file. Take the start CSS file from melown:https://cdn.melown.com/libs/vtsjs/browser/v2/vts-browser.min.css and add whatever you want to add to this (i.e. [Adding layer switch and legend]( http://vtsdocs.melown.com/en/latest/tutorials/landuse-frontend.html))
+CSS file. Take the start CSS file from melown:https://cdn.melown.com/libs/vtsjs/browser/v2/vts-browser.min.css and add whatever you want to add to this (i.e. [Adding layer switch and legend]( http://vtsdocs.melown.com/en/latest/tutorials/landuse-frontend.html)) 
+
+**QUESTION: is the above a correct assumption?**
+
+
 
 File name: sandwich_style.css and reference to it in the HTML file in the <head> section 
+
+``` css
+<style>
+        #map-div {
+            width: 800px;
+            height: 100%;
+        }
+        .switch-panel-div {
+            position: absolute;
+            right: 320px;
+            bottom: 20px;
+            background-color: #eee;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: solid 1px #000;            
+            width: 300px;
+        }
+```
 
