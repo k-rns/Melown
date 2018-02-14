@@ -262,10 +262,13 @@ Following URL contains the mosaic:
 http://jetstream.signell.us:8070/mapproxy/melown2015/tms/sandwich/sandwich_ortho/  
 Build-up of the URL can be found here: http://vtsdocs.melown.com/en/latest/reference/server/vts-backend.html#how-it-works 
 
+
+
 Following URL should hold the 3D map: http://jetstream.signell.us:8070/mapproxy/melown2015/surface/sandwich/sandwich_dem_resampling/  
-Description URL: <server>:<port>/<reference-frame>/<resource-type>/<resource-group>/<resource-id>/ 
 
+Description URL: ``` <server>:<port>/<reference-frame>/<resource-type>/<resource-group>/<resource-id>/ ```
 
+imilarly, URL `localhost:8070/store/` points to VTSD upstream which supports directory listing allowing to browse to particular [storage](http://vtsdocs.melown.com/en/latest/reference/concepts.html#storage), [tileset](http://vtsdocs.melown.com/en/latest/reference/concepts.html#tileset) or [storage view](http://vtsdocs.melown.com/en/latest/reference/concepts.html#storage-view).
 
 # Summary
 
