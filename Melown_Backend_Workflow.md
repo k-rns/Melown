@@ -32,7 +32,7 @@ Important directories to make:
 + Dataset directory: ```/var/vts/mapproxy/datasets/sandwich```  
 
 Edit mapproxy resource configuration: ```/etc/vts/mapproxy/resources.json``` by adding line for sandwich resources: 
-```
+```bash
 [
     { "include": "examples.d/*.json" },
     { "include": "mars-case-study.d/*.json"  },
@@ -54,7 +54,7 @@ Copy DEM to the dataset folder used by the VTS backend (works only if you're log
 Change directory for easy use: ```$ cd /var/vts/mapproxy/datasets/sandwich```  
 
 Generate 3 sets of overviews of the DEM with different resampling algorithm:  
-```
+```bash
 $ for resampling in min max cubicspline; do \
     generatevrtwo --input 2017-03-16_Sandwich_v1_DEM_10cm.tif \
         --output 2017-03-16_Sandwich_v1_DEM_10cm.$resampling \
@@ -63,7 +63,7 @@ $ for resampling in min max cubicspline; do \
 Try to add if not work: --co PREDICTOR=3  
 
 Create directory to hold symbolic links (in the directory you've changed to):   
-```
+```bash
 $ mkdir sandwich_dem_resampling && cd sandwich_dem_resampling
 $ ln -s ../2017-03-16_Sandwich_v1_DEM_10cm.cubicspline/dataset dem
 $ ln -s ../2017-03-16_Sandwich_v1_DEM_10cm.min/dataset dem.min
@@ -77,7 +77,7 @@ range: 15,23 4983,6095:4984,6096
 position: obj,-70.481013,41.765911,float,0.000000,0.000000,-90.000000,0.000000,2407.202226,45.000000  
 
 Mapproxy tiling: make sure that the tiling and the names of the dem on which the tiling has happened are the same!!!  
-```
+```bash
 $ mapproxy-tiling --input sandwich_dem_resampling --referenceFrame melown2015 \
     --lodRange 15,23 --tileRange 4983,6095:4984,6096
 ```
@@ -85,7 +85,7 @@ $ mapproxy-tiling --input sandwich_dem_resampling --referenceFrame melown2015 \
 ### Set up the terrain resource configuration file
 Create resource configuration file: ```$ touch /etc/vts/mapproxy/sandwich.d/sandwich_dem.json```  
 With following content: position is from the mapproxy-callipers outcome. 
-```
+```bash
 [{
     "group" : "sandwich",
     "id" : "sandwich_dem_resampling",
@@ -133,23 +133,28 @@ Resource configuration file: /etc/vts/mapproxy/sandwich.d/sandwich_ortho.json
 
 ### Prepare the orthophoto
 Build overviews for the orthophoto imagery with generatevrtwo function. (Input variable is a file, the ouput variable is a directory!): No wrapx parameter if it is not a global dataset     
-```$ generatevrtwo --input /var/vts/mapproxy/datasets/sandwich/2017-03-16_Sandwich_v1_ORTHO_10cm.tif  --output /var/vts/mapproxy/datasets/sandwich/2017-03-16_Sandwich_v1_ORTHO_10cm.average --resampling average --co PREDICTOR=2 --co ZLEVEL=9 --tileSize 4096x4096``` 
+```bash 
+$ generatevrtwo --input /var/vts/mapproxy/datasets/sandwich/2017-03-16_Sandwich_v1_ORTHO_10cm.tif  --output /var/vts/mapproxy/datasets/sandwich/2017-03-16_Sandwich_v1_ORTHO_10cm.average --resampling average --co PREDICTOR=2 --co ZLEVEL=9 --tileSize 4096x4096
+```
 
 The virtual dataset is created in /dataset. Create symbolic link to access it (convenience purporse):  
-```$ ln -s /var/vts/mapproxy/datasets/sandwich/2017-03-16_Sandwich_v1_ORTHO_10cm.average/dataset /var/vts/mapproxy/datasets/sandwich/sandwich_ortho```  
+```bash 
+$ ln -s /var/vts/mapproxy/datasets/sandwich/2017-03-16_Sandwich_v1_ORTHO_10cm.average/dataset /var/vts/mapproxy/datasets/sandwich/sandwich_ortho
+```
 
 Take measurements from the dataset using the mapproxy-callipers command. The outcomes are needed in a further stage.   
-```
+```bash 
 $ cd /var/vts/mapproxy/datasets/sandwich
-$ mapproxy-calipers sandwich_ortho --referenceFrame melown2015 
+$ mapproxy-calipers sandwich_ortho --referenceFrame melown2015
 ```
+
 Results:  
 range: 15,23 4983,6095:4984,6096
 position: obj,-70.480140,41.766404,float,0.000000,0.000000,-90.000000,0.000000,1369.695663,45.000000  
 
 ### Set up the mosaic resource configuration file
-Create a resource configuration file for the orthophoto: ```$  /etc/vts/mapproxy/sandwich.d/sandwich_ortho.json``` and edit is as described below:    
-```
+Create a resource configuration file for the orthophoto: ```$ /etc/vts/mapproxy/sandwich.d/sandwich_ortho.json``` and edit is as described below:    
+```bash
 [{
     "group" : "sandwich",
     "id" : "sandwich_ortho",
@@ -187,7 +192,7 @@ Set up a "monolithic geodata free layer definition" - geodata-vector driver, ins
 
 ### Create the resource configuration file
 In VTS terminology, you will create a monolithic geodata free layer definition. Among other things, it defines the path to the feature dataset (definition.dataset) and elevation DEM (definition.demDataset). Create a resource configuration file at ```/etc/vts/mapproxy/sandwich.d/sandwich_vector.json ``` with the following contents. The vector layer will have the same tile range as SRTM DEM because larger is not needed.
-```
+```bash
 [{
     "comment": "Sandwich sampling location 10 January 2018",   
     "group": "sandwich",
