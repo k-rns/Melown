@@ -11,4 +11,4 @@ Folder structure:
 + Melown_Backend_Workflow.md: Description of the workflow to set-up the Sandwich display test case using the Melown technology on our server. (Deduced from Melown tutorials).
 + Melown_Frontend_Workflow.md: Description of the workflow to set up the front end of the melown tecnology on our own server. (deduced from Melown tutorials).
 
-T
+Changes are ok
